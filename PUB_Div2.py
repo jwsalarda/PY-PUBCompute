@@ -32,8 +32,10 @@ vis_mas_count = int(input("How many visitors for Master's room tenant?: "))
 if vis_mas_count > 0 :
     vis_mas_days_stay = int(input("How many days did the master's room visitor stayed?: "))
     vis_mas_total_days = vis_mas_count * vis_mas_days_stay
+    mas_total_days = 30 - mas_days_out
 else :
     #Master Room Computation
+    vis_mas_total_days = 0
     mas_total_days = 30 - mas_days_out
 
 
@@ -51,8 +53,10 @@ vis_room1_count = int(input("How many visitors for Common Room 1 (Zip)?: "))
 if vis_room1_count > 0 :
     vis_room1_days_stay = int(input("How many days did the common room1 visitor stayed?: "))
     vis_room1_total_days = vis_room1_count * vis_room1_days_stay
+    room1_total_days = 30 - common1_days_out
 else :
 #COMMON ROOM1 Computation
+    vis_room1_total_days = 0
     room1_total_days = 30 - common1_days_out
 
 print("")
@@ -63,15 +67,24 @@ vis_room2_count = int(input("How many visitors for Common Room 2 (Joey)?: "))
 if vis_room2_count > 0 :
     vis_room2_days_stay = int(input("How many days did the common room1 visitor stayed?"))
     vis_room2_total_days = vis_room2_count * vis_room2_days_stay
+    room2_total_days = 30 - common2_days_out
 else :
 #COMMON ROOM COMPUTATION
+    vis_room2_total_days = 0
     room2_total_days = 30 - common2_days_out
 
 
 #OVERALL COMPUTATION
+
+per_day_rate = pub_month / (mas_total_days + room1_total_days + room2_total_days + vis_mas_total_days + vis_room1_total_days + vis_room2_total_days)
+
+mas_total_pay = float(per_day_rate) * mas_total_days
+mvis_total_pay = float(per_day_rate) * vis_mas_total_days
+
 print("======== COMPUTATION SUMMARY =======")
 print("")
-print("== TENANT  == DAYS STAY === VISITOR(S) === DAYS STAY ===")
-print("=== JOHN   = (",mas_total_days,"/ 30 )      ",vis_mas_count,"           ",vis_mas_total_days)
-print("=== ZIP    = (",room1_total_days,"/ 30 )      ",vis_room1_count,"           ",vis_room1_total_days)
-print("=== JOEY   = (",room2_total_days,"/ 30 )      ",vis_room2_count,"           ",vis_room2_total_days)
+print("Per Day Rate:",per_day_rate)
+print("=== TENANT === DAYS STAY === VISITOR(S) === DAYS STAY ===")
+print("===  JOHN   = (",mas_total_days,"/ 30 )      ",vis_mas_count,"           ",vis_mas_total_days, " ",mas_total_pay )
+print("===  ZIP    = (",room1_total_days,"/ 30 )      ",vis_room1_count,"           ",vis_room1_total_days)
+print("===  JOEY   = (",room2_total_days,"/ 30 )      ",vis_room2_count,"           ",vis_room2_total_days)
